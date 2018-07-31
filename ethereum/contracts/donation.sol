@@ -1,7 +1,20 @@
 pragma solidity ^0.4.17;
 
-contract Donation {
-    
+
+contract CampaignFactory {
+    address[] public deployedCampaigns;
+
+    function createCampaigns(uint minimum) public {
+        address newCampaign = new Campaign(minimum , msg.sender);
+        deployedCampaigns.push(newCampaign);
+    }
+
+    function getDeployedCampaigns() public view returns (address[]) {
+        return deployedCampaigns;
+    }
+}
+
+contract Campaign {
     struct Request {
         string description;
         address recipent;
@@ -17,8 +30,8 @@ contract Donation {
     mapping(address => bool) public approvers;
     Request[] public requests;
     
-    function Donation(uint minimum) public {
-        manager = msg.sender;
+    function Campaign(uint minimum, address addr) public {
+        manager = addr;
         minContribution = minimum;
         approversCount = 0;
     }
