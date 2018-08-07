@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "semantic-ui-react";
+import { Card, Button, Icon } from "semantic-ui-react";
 import Layout from "../components/Layout";
 import factory from "../ethereum/factory";
 
@@ -19,10 +19,19 @@ class Index extends React.Component {
       };
     });
 
-    return <Card.Group item={items} />;
+    return <Card.Group items={items} />;
   }
   render() {
-    return <Layout>{this.renderCampaigns()}</Layout>;
+    return (
+      <Layout>
+        <h2>Open Organizations</h2>
+        <Button floated="right" icon labelPosition="left" primary>
+          <Icon name="add" />
+          Add Organization
+        </Button>
+        {this.renderCampaigns()}
+      </Layout>
+    );
   }
 }
 
