@@ -1,16 +1,17 @@
 import React from "react";
 import Campaign from "../../ethereum/campaign.js";
-import { Card, Grid } from "semantic-ui-react";
+import { Card, Grid, Button } from "semantic-ui-react";
 import Layout from "../../components/Layout";
 import ContributeForm from "../../components/ContributeForm";
 import web3 from "../../ethereum/web3";
+import { Link } from "../../routes";
 
 class OrganizationShow extends React.Component {
   static getInitialProps = async props => {
-    const campaign = await Campaign(props.query.address);
+    const campaign = Campaign(props.query.address);
     const summary = await campaign.methods.getSummary().call();
-    console.log(summary);
     return {
+      address: props.query.address,
       minContributions: summary[0],
       balance: summary[1],
       requests: summary[2],
@@ -52,11 +53,23 @@ class OrganizationShow extends React.Component {
     return (
       <Layout>
         <Grid>
-          <Grid.Column width = {10} >{this.renderCards()}</Grid.Column>
-          <Grid.Column width = {6}>
-            <h3>Conribute To This Organization</h3>
-            <ContributeForm />
-          </Grid.Column>
+          <Grid.Row>
+            <Grid.Column width={10}>{this.renderCards()}</Grid.Column>
+            <Grid.Column width={6}>
+              <h3>Contribute To This Organization</h3>
+              <ContributeForm address={this.props.address} />
+            </Grid.Column>
+          </Grid.Row>
+          
+          <Grid.Row>
+            <Grid.Column>
+              <Link route={`/organizations/${this.props.address}/requests`}>
+                <a>
+                  <Button primary>View Requests</Button>
+                </a>
+              </Link>
+            </Grid.Column>
+          </Grid.Row>
         </Grid>
       </Layout>
     );
