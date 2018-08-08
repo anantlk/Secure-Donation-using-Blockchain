@@ -78,4 +78,14 @@ contract Campaign {
         request.recipent.transfer(request.value);
         request.complete = true;
     }
+
+    function getSummary() public view returns(uint ,uint ,uint ,uint ) {
+        return (
+            minContribution,
+            this.balance,
+            requests.length,
+            approversCount
+        );
+    }
+
 }

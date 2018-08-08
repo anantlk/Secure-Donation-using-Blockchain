@@ -46,6 +46,8 @@ var _factory = require("../ethereum/factory");
 
 var _factory2 = _interopRequireDefault(_factory);
 
+var _routes = require("../routes");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = "/media/anant/Anant/Projects/Secure-Donation/pages/index.js?entry";
@@ -66,19 +68,23 @@ var Index = function (_React$Component) {
       var items = this.props.campaigns.map(function (address) {
         return {
           header: address,
-          description: _react2.default.createElement("a", {
+          description: _react2.default.createElement(_routes.Link, { route: "/organizations/" + address, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 19
+            }
+          }, _react2.default.createElement("a", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 17
+              lineNumber: 20
             }
-          }, "View Campaign"),
+          }, "View Campaign")),
           fluid: true
         };
       });
 
       return _react2.default.createElement(_semanticUiReact.Card.Group, { items: items, __source: {
           fileName: _jsxFileName,
-          lineNumber: 22
+          lineNumber: 27
         }
       });
     }
@@ -88,22 +94,31 @@ var Index = function (_React$Component) {
       return _react2.default.createElement(_Layout2.default, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 26
+          lineNumber: 31
         }
       }, _react2.default.createElement("h2", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 27
+          lineNumber: 32
         }
-      }, "Open Organizations"), _react2.default.createElement(_semanticUiReact.Button, { floated: "right", icon: true, labelPosition: "left", primary: true, __source: {
+      }, "Open Organizations"), _react2.default.createElement(_routes.Link, { route: "/organizations/new", __source: {
           fileName: _jsxFileName,
-          lineNumber: 28
+          lineNumber: 33
+        }
+      }, _react2.default.createElement("a", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 34
+        }
+      }, _react2.default.createElement(_semanticUiReact.Button, { floated: "right", icon: true, labelPosition: "left", primary: true, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 35
         }
       }, _react2.default.createElement(_semanticUiReact.Icon, { name: "add", __source: {
           fileName: _jsxFileName,
-          lineNumber: 29
+          lineNumber: 36
         }
-      }), "Add Organization"), this.renderCampaigns());
+      }), "Add Organization"))), this.renderCampaigns());
     }
   }], [{
     key: "getInitialProps",
@@ -141,4 +156,4 @@ var Index = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Index;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL2luZGV4LmpzIl0sIm5hbWVzIjpbIlJlYWN0IiwiQ2FyZCIsIkJ1dHRvbiIsIkljb24iLCJMYXlvdXQiLCJmYWN0b3J5IiwiSW5kZXgiLCJpdGVtcyIsInByb3BzIiwiY2FtcGFpZ25zIiwibWFwIiwiaGVhZGVyIiwiYWRkcmVzcyIsImRlc2NyaXB0aW9uIiwiZmx1aWQiLCJyZW5kZXJDYW1wYWlnbnMiLCJtZXRob2RzIiwiZ2V0RGVwbG95ZWRDYW1wYWlnbnMiLCJjYWxsIiwiQ29tcG9uZW50Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsQUFBTzs7OztBQUNQLEFBQVMsQUFBTSxBQUFROztBQUN2QixBQUFPLEFBQVk7Ozs7QUFDbkIsQUFBTyxBQUFhOzs7Ozs7Ozs7SSxBQUVkOzs7Ozs7Ozs7OztzQ0FPYyxBQUNoQjtVQUFNLGFBQVEsQUFBSyxNQUFMLEFBQVcsVUFBWCxBQUFxQixJQUFJLG1CQUFXLEFBQ2hEOztrQkFBTyxBQUNHLEFBQ1I7dUNBQWEsY0FBQTs7d0JBQUE7MEJBQUE7QUFBQTtBQUFBLFdBQUEsRUFGUixBQUVRLEFBQ2I7aUJBSEYsQUFBTyxBQUdFLEFBRVY7QUFMUSxBQUNMO0FBRkosQUFBYyxBQVFkLE9BUmM7OzJDQVFQLEFBQUMsc0JBQUQsQUFBTSxTQUFNLE9BQVosQUFBbUI7b0JBQW5CO3NCQUFQLEFBQU8sQUFDUjtBQURRO09BQUE7Ozs7NkJBRUEsQUFDUDs2QkFDRSxBQUFDOztvQkFBRDtzQkFBQSxBQUNFO0FBREY7QUFBQSxPQUFBLGtCQUNFLGNBQUE7O29CQUFBO3NCQUFBO0FBQUE7QUFBQSxTQURGLEFBQ0UsQUFDQSx1Q0FBQSxBQUFDLHlDQUFPLFNBQVIsQUFBZ0IsU0FBUSxNQUF4QixNQUE2QixlQUE3QixBQUEyQyxRQUFPLFNBQWxEO29CQUFBO3NCQUFBLEFBQ0U7QUFERjt5QkFDRSxBQUFDLHVDQUFLLE1BQU4sQUFBVztvQkFBWDtzQkFERixBQUNFO0FBQUE7VUFISixBQUVFLEFBSUMsMEJBUEwsQUFDRSxBQU1HLEFBQUssQUFHWDs7Ozs7Ozs7Ozs7O3VCQTNCeUIsa0JBQUEsQUFBUSxRQUFSLEFBQWdCLHVCQUFoQixBQUF1QyxBOzttQkFBekQ7QTtpREFFQyxFQUFFLFdBQUYsQTs7Ozs7Ozs7Ozs7Ozs7Ozs7OztFQUpTLGdCQUFNLEEsQUFnQzFCOztrQkFBQSxBQUFlIiwiZmlsZSI6ImluZGV4LmpzP2VudHJ5Iiwic291cmNlUm9vdCI6Ii9tZWRpYS9hbmFudC9BbmFudC9Qcm9qZWN0cy9TZWN1cmUtRG9uYXRpb24ifQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL2luZGV4LmpzIl0sIm5hbWVzIjpbIlJlYWN0IiwiQ2FyZCIsIkJ1dHRvbiIsIkljb24iLCJMYXlvdXQiLCJmYWN0b3J5IiwiTGluayIsIkluZGV4IiwiaXRlbXMiLCJwcm9wcyIsImNhbXBhaWducyIsIm1hcCIsImhlYWRlciIsImFkZHJlc3MiLCJkZXNjcmlwdGlvbiIsImZsdWlkIiwicmVuZGVyQ2FtcGFpZ25zIiwibWV0aG9kcyIsImdldERlcGxveWVkQ2FtcGFpZ25zIiwiY2FsbCIsIkNvbXBvbmVudCJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLEFBQU87Ozs7QUFDUCxBQUFTLEFBQU0sQUFBUTs7QUFDdkIsQUFBTyxBQUFZOzs7O0FBQ25CLEFBQU8sQUFBYTs7OztBQUNwQixBQUFTLEFBQVk7Ozs7Ozs7SUFFZixBOzs7Ozs7Ozs7OztzQ0FPYyxBQUNoQjtVQUFNLGFBQVEsQUFBSyxNQUFMLEFBQVcsVUFBWCxBQUFxQixJQUFJLG1CQUFXLEFBQ2hEOztrQkFBTyxBQUNHLEFBQ1I7dUNBQ0UsQUFBQyw4QkFBSywyQkFBTixBQUErQjt3QkFBL0I7MEJBQUEsQUFDRTtBQURGO1dBQUEsa0JBQ0UsY0FBQTs7d0JBQUE7MEJBQUE7QUFBQTtBQUFBLGFBSkMsQUFHSCxBQUNFLEFBR0o7aUJBUEYsQUFBTyxBQU9FLEFBRVY7QUFUUSxBQUNMO0FBRkosQUFBYyxBQVlkLE9BWmM7OzJDQVlQLEFBQUMsc0JBQUQsQUFBTSxTQUFNLE9BQVosQUFBbUI7b0JBQW5CO3NCQUFQLEFBQU8sQUFDUjtBQURRO09BQUE7Ozs7NkJBRUEsQUFDUDs2QkFDRSxBQUFDOztvQkFBRDtzQkFBQSxBQUNFO0FBREY7QUFBQSxPQUFBLGtCQUNFLGNBQUE7O29CQUFBO3NCQUFBO0FBQUE7QUFBQSxTQURGLEFBQ0UsQUFDQSx1Q0FBQSxBQUFDLDhCQUFLLE9BQU4sQUFBWTtvQkFBWjtzQkFBQSxBQUNFO0FBREY7eUJBQ0UsY0FBQTs7b0JBQUE7c0JBQUEsQUFDRTtBQURGO0FBQUEseUJBQ0UsQUFBQyx5Q0FBTyxTQUFSLEFBQWdCLFNBQVEsTUFBeEIsTUFBNkIsZUFBN0IsQUFBMkMsUUFBTyxTQUFsRDtvQkFBQTtzQkFBQSxBQUNFO0FBREY7eUJBQ0UsQUFBQyx1Q0FBSyxNQUFOLEFBQVc7b0JBQVg7c0JBREYsQUFDRTtBQUFBO1VBTFIsQUFFRSxBQUNFLEFBQ0UsQUFNSCw0QkFYTCxBQUNFLEFBVUcsQUFBSyxBQUdYOzs7Ozs7Ozs7Ozs7dUJBbkN5QixrQkFBQSxBQUFRLFFBQVIsQUFBZ0IsdUJBQWhCLEFBQXVDLEE7O21CQUF6RDtBO2lEQUVDLEVBQUUsV0FBRixBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0VBSlMsZ0JBQU0sQSxBQXdDMUI7O2tCQUFBLEFBQWUiLCJmaWxlIjoiaW5kZXguanM/ZW50cnkiLCJzb3VyY2VSb290IjoiL21lZGlhL2FuYW50L0FuYW50L1Byb2plY3RzL1NlY3VyZS1Eb25hdGlvbiJ9

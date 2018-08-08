@@ -3,6 +3,7 @@ import { Form, Button, Input, Message } from "semantic-ui-react";
 import Layout from "../../components/Layout";
 import factory from "../../ethereum/factory";
 import web3 from "../../ethereum/web3";
+import { Router } from "../../routes";
 
 class NewOrganization extends React.Component {
   state = {
@@ -12,7 +13,7 @@ class NewOrganization extends React.Component {
   };
 
   onSubmit = async event => {
-    // event.preventDefault();
+    console.log(Router);
     console.log(this.state.minContribution);
     try {
       if (this.state.loading) return;
@@ -25,6 +26,8 @@ class NewOrganization extends React.Component {
       await factory.methods
         .createCampaigns(this.state.minContribution)
         .send({ from: accounts[0] });
+      console.log("Redirecting");
+      Router.pushRoute("/");
     } catch (err) {
       this.setState({
         errMessage: err.message
