@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Button } from "semantic-ui-react";
 import web3 from "../ethereum/web3";
 import Campaign from "../ethereum/campaign";
-
+import { Router } from "../routes";
 class RenderRow extends React.Component {
   async onApprove() {
     const campaign = Campaign(this.props.address);
@@ -10,6 +10,7 @@ class RenderRow extends React.Component {
     await campaign.methods.approveRequest(this.props.id).send({
       from: accounts[0]
     });
+    Router.replaceRoute(`/organizations/${this.props.address}/requests`);
   }
 
   async onFinalize() {
@@ -26,7 +27,7 @@ class RenderRow extends React.Component {
     return (
       <Row
         disabled={this.props.request.complete}
-        positive={readyToBeFinalized && this.props.request.complete}
+        positive={readyToBeFinalized && !this.props.request.complete}
       >
         <Cell>{this.props.id}</Cell>
         <Cell>{this.props.request.description}</Cell>

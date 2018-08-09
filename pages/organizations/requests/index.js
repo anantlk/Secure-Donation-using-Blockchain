@@ -12,18 +12,13 @@ class ViewRequests extends React.Component {
     const requestCount = await campaign.methods.getRequestsCount().call();
     const approverCount = await campaign.methods.approversCount().call();
     let requests;
-    console.log(requestCount);
-    if (requestCount > 0) {
-      requests = await Promise.all(
-        Array(requestCount)
-          .fill()
-          .map((element, index) => {
-            return campaign.methods.requests(index).call();
-          })
-      );
-    } else {
-      requests = [];
-    }
+    requests = await Promise.all(
+      Array(parseInt(requestCount))
+        .fill()
+        .map(async (element, index) => {
+          return campaign.methods.requests(index).call();
+        })
+    );
     return { address, requests, approverCount };
   }
 
