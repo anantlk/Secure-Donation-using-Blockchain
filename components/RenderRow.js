@@ -1,22 +1,22 @@
 import React from "react";
 import { Table, Button } from "semantic-ui-react";
 import web3 from "../ethereum/web3";
-import Campaign from "../ethereum/campaign";
+import Organization from "../ethereum/organization";
 import { Router } from "../routes";
 class RenderRow extends React.Component {
   async onApprove() {
-    const campaign = Campaign(this.props.address);
+    const organization = Organization(this.props.address);
     const accounts = await web3.eth.getAccounts();
-    await campaign.methods.approveRequest(this.props.id).send({
+    await organization.methods.approveRequest(this.props.id).send({
       from: accounts[0]
     });
     Router.replaceRoute(`/organizations/${this.props.address}/requests`);
   }
 
   async onFinalize() {
-    const campaign = Campaign(this.props.address);
+    const organization = organization(this.props.address);
     const accounts = await web3.eth.getAccounts();
-    await campaign.methods.finalizeRequest(this.props.id).send({
+    await organization.methods.finalizeRequest(this.props.id).send({
       from: accounts[0]
     });
   }

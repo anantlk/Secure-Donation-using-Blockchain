@@ -10,21 +10,21 @@ import {
   Icon
 } from "semantic-ui-react";
 import Layout from "../../../components/Layout";
-import Campaign from "../../../ethereum/campaign";
+import Organization from "../../../ethereum/organization";
 import RenderRow from "../../../components/RenderRow";
 
 class ViewRequests extends React.Component {
   static async getInitialProps(props) {
     const { address } = props.query;
-    const campaign = await Campaign(address);
-    const requestCount = await campaign.methods.getRequestsCount().call();
-    const approverCount = await campaign.methods.approversCount().call();
+    const organization = await Organization(address);
+    const requestCount = await organization.methods.getRequestsCount().call();
+    const approverCount = await organization.methods.approversCount().call();
     let requests;
     requests = await Promise.all(
       Array(parseInt(requestCount))
         .fill()
         .map(async (element, index) => {
-          return campaign.methods.requests(index).call();
+          return organization.methods.requests(index).call();
         })
     );
     return { address, requests, approverCount };

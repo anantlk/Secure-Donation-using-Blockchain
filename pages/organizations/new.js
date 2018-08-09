@@ -8,13 +8,13 @@ import { Router } from "../../routes";
 class NewOrganization extends React.Component {
   state = {
     minContribution: "",
+    name:"",
+    desc:"",
     errMessage: "",
     loading: false
   };
 
   onSubmit = async event => {
-    console.log(Router);
-    console.log(this.state.minContribution);
     try {
       if (this.state.loading) return;
       const accounts = await web3.eth.getAccounts();
@@ -24,7 +24,7 @@ class NewOrganization extends React.Component {
       });
       console.log(accounts);
       await factory.methods
-        .createOrganizations(this.state.minContribution)
+        .createOrganizations(this.state.minContribution,this.state.name,this.state.desc)
         .send({ from: accounts[0] });
       console.log("Redirecting");
       Router.pushRoute("/");
@@ -42,7 +42,29 @@ class NewOrganization extends React.Component {
         <Form onSubmit={this.onSubmit} error={!!this.state.errMessage}>
           <Form.Field>
             <label>
-              <h3>Minimum Contribution:</h3>
+              <h3>Name</h3>
+            </label>
+            <Input
+              value={this.state.name}
+              onChange={event =>
+                this.setState({ name: event.target.value })
+              }
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>
+              <h3>Description</h3>
+            </label>
+            <Input
+              value={this.state.desc}
+              onChange={event =>
+                this.setState({ desc: event.target.value })
+              }
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>
+              <h3>Minimum Contribution</h3>
             </label>
             <Input
               label="wei"

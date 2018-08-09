@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input, Message, Button, Icon } from "semantic-ui-react";
 import web3 from "../../../ethereum/web3";
-import Campaign from "../../../ethereum/campaign";
+import Organization from "../../../ethereum/organization";
 import Layout from "../../../components/Layout";
 import { Link, Router } from "../../../routes";
 
@@ -25,11 +25,11 @@ class NewRequest extends React.Component {
       errMessage: "",
       loading: true
     });
-    const campaign = Campaign(this.props.address);
+    const organization = Organization(this.props.address);
     try {
       const accounts = await web3.eth.getAccounts();
       const { description, value, recipient } = this.state;
-      await campaign.methods
+      await organization.methods
         .createRequest(description, recipient, web3.utils.toWei(value, "ether"))
         .send({
           from: accounts[0]

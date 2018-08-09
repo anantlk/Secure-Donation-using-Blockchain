@@ -1,5 +1,5 @@
 import React from "react";
-import Campaign from "../../ethereum/campaign.js";
+import Organization from "../../ethereum/organization.js";
 import { Card, Grid, Button, Icon } from "semantic-ui-react";
 import Layout from "../../components/Layout";
 import ContributeForm from "../../components/ContributeForm";
@@ -8,14 +8,16 @@ import { Link } from "../../routes";
 
 class OrganizationShow extends React.Component {
   static getInitialProps = async props => {
-    const campaign = Campaign(props.query.address);
-    const summary = await campaign.methods.getSummary().call();
+    const organization = Organization(props.query.address);
+    const summary = await organization.methods.getSummary().call();
+    const name = await organization.methods.organizationName().call();
     return {
       address: props.query.address,
       minContributions: summary[0],
       balance: summary[1],
       requests: summary[2],
-      contributors: summary[3]
+      contributors: summary[3],
+      name: name
     };
   };
 
@@ -52,6 +54,7 @@ class OrganizationShow extends React.Component {
   render() {
     return (
       <Layout>
+        <h2>{this.props.name}</h2>
         <Grid>
           <Grid.Row>
             <Grid.Column width={10}>{this.renderCards()}</Grid.Column>
@@ -71,7 +74,8 @@ class OrganizationShow extends React.Component {
               <Link route={`/`}>
                 <a>
                   <Button icon labelPosition="left" primary>
-                    <Icon name="left arrow" />Back
+                    <Icon name="left arrow" />
+                    Back
                   </Button>
                 </a>
               </Link>
