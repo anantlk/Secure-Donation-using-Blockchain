@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Message, Button } from "semantic-ui-react";
+import { Form, Input, Message, Button, Icon } from "semantic-ui-react";
 import web3 from "../../../ethereum/web3";
 import Campaign from "../../../ethereum/campaign";
 import Layout from "../../../components/Layout";
@@ -91,7 +91,7 @@ class NewRequest extends React.Component {
           </Button>
           <Link route={`/organizations/${this.props.address}/requests`}>
             <a>
-              <Button primary>Back</Button>
+              <Button icon labelPosition = "left" primary><Icon name = "left arrow" / >Back</Button>
             </a>
           </Link>
         </Form>

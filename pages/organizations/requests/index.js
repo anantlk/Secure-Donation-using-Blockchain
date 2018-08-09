@@ -1,6 +1,14 @@
 import React from "react";
 import { Link } from "../../../routes";
-import { Button, Table } from "semantic-ui-react";
+import {
+  Button,
+  Table,
+  Dimmer,
+  Loader,
+  Image,
+  Segment,
+  Icon
+} from "semantic-ui-react";
 import Layout from "../../../components/Layout";
 import Campaign from "../../../ethereum/campaign";
 import RenderRow from "../../../components/RenderRow";
@@ -41,9 +49,22 @@ class ViewRequests extends React.Component {
     const { Header, Row, HeaderCell, Body } = Table;
     return (
       <Layout>
+        {/* <Dimmer active inverted>
+          <Loader size="large">Processing Request ...</Loader>
+        </Dimmer> */}
         <Link route={`/organizations/${this.props.address}/requests/new`}>
           <a>
-            <Button primary>Add Request</Button>
+            <Button floated="right" primary>
+              Add Request
+            </Button>
+          </a>
+        </Link>
+        <Link route={`/organizations/${this.props.address}`}>
+          <a>
+            <Button icon labelPosition = "left" floated="right" primary>
+              <Icon name = "left arrow"/>
+              Back
+            </Button>
           </a>
         </Link>
         <h2>Requests</h2>
