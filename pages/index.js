@@ -10,34 +10,39 @@ class Index extends React.Component {
     const organizationAddr = await factory.methods
       .getDeployedOrganizations()
       .call();
-
-    console.log(organizationAddr);
     const organizations = await Promise.all(
       organizationAddr.map((addr, index) => {
         const organization = Organization(addr);
         return organization.methods.getOrganizationDetails().call();
       })
     );
+    console.log(organizationAddr);
     console.log(organizations);
-    return { organizations };
+    return { organizations, organizationAddr };
   }
 
   renderOrganizations() {
-    return 1;
-    // const items = this.props.organizations.map(address => {
-    //   return {
-    //     header: this.props.name,
-    //     content: this.props.desc,
-    //     description: (
-    //       <Link route={`/organizations/${address}`}>
-    //         <a>View Organization</a>
-    //       </Link>
-    //     ),
-    //     fluid: true
-    //   };
-    // });
+    const items = this.props.organizations.map((organization, index) => {
+      return {
+        header: <h1>{organization[0]}</h1>,
+        description: (
+          <div>
+            <h4>
+              {organization[1]}
+              <br />
+            </h4>
+            <Link
+              route={`/organizations/${this.props.organizationAddr[index]}`}
+            >
+              <a>View Organization</a>
+            </Link>
+          </div>
+        ),
+        fluid: true
+      };
+    });
 
-    // return <Card.Group items={items} />;
+    return <Card.Group items={items} />;
   }
   render() {
     return (

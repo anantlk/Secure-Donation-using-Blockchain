@@ -73,21 +73,52 @@ var Index = function (_React$Component) {
   (0, _createClass3.default)(Index, [{
     key: "renderOrganizations",
     value: function renderOrganizations() {
-      return 1;
-      // const items = this.props.organizations.map(address => {
-      //   return {
-      //     header: this.props.name,
-      //     content: this.props.desc,
-      //     description: (
-      //       <Link route={`/organizations/${address}`}>
-      //         <a>View Organization</a>
-      //       </Link>
-      //     ),
-      //     fluid: true
-      //   };
-      // });
+      var _this2 = this;
 
-      // return <Card.Group items={items} />;
+      var items = this.props.organizations.map(function (organization, index) {
+        return {
+          header: _react2.default.createElement("h1", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 27
+            }
+          }, organization[0]),
+          description: _react2.default.createElement("div", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 29
+            }
+          }, _react2.default.createElement("h4", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 30
+            }
+          }, organization[1], _react2.default.createElement("br", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 32
+            }
+          })), _react2.default.createElement(_routes.Link, {
+            route: "/organizations/" + _this2.props.organizationAddr[index],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 34
+            }
+          }, _react2.default.createElement("a", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 37
+            }
+          }, "View Organization"))),
+          fluid: true
+        };
+      });
+
+      return _react2.default.createElement(_semanticUiReact.Card.Group, { items: items, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 45
+        }
+      });
     }
   }, {
     key: "render",
@@ -95,29 +126,29 @@ var Index = function (_React$Component) {
       return _react2.default.createElement(_Layout2.default, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 44
+          lineNumber: 49
         }
       }, _react2.default.createElement("h2", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 45
+          lineNumber: 50
         }
       }, "Open Organizations"), _react2.default.createElement(_routes.Link, { route: "/organizations/new", __source: {
           fileName: _jsxFileName,
-          lineNumber: 46
+          lineNumber: 51
         }
       }, _react2.default.createElement("a", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 47
+          lineNumber: 52
         }
       }, _react2.default.createElement(_semanticUiReact.Button, { floated: "right", icon: true, labelPosition: "left", primary: true, __source: {
           fileName: _jsxFileName,
-          lineNumber: 48
+          lineNumber: 53
         }
       }, _react2.default.createElement(_semanticUiReact.Icon, { name: "add", __source: {
           fileName: _jsxFileName,
-          lineNumber: 49
+          lineNumber: 54
         }
       }), "Add Organization"))), this.renderOrganizations());
     }
@@ -135,19 +166,18 @@ var Index = function (_React$Component) {
 
               case 2:
                 organizationAddr = _context.sent;
-
-                console.log(organizationAddr);
-                _context.next = 6;
+                _context.next = 5;
                 return _promise2.default.all(organizationAddr.map(function (addr, index) {
                   var organization = (0, _organization2.default)(addr);
                   return organization.methods.getOrganizationDetails().call();
                 }));
 
-              case 6:
+              case 5:
                 organizations = _context.sent;
 
+                console.log(organizationAddr);
                 console.log(organizations);
-                return _context.abrupt("return", { organizations: organizations });
+                return _context.abrupt("return", { organizations: organizations, organizationAddr: organizationAddr });
 
               case 9:
               case "end":
@@ -169,4 +199,4 @@ var Index = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Index;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL2luZGV4LmpzIl0sIm5hbWVzIjpbIlJlYWN0IiwiQ2FyZCIsIkJ1dHRvbiIsIkljb24iLCJMYXlvdXQiLCJmYWN0b3J5IiwiTGluayIsIk9yZ2FuaXphdGlvbiIsIkluZGV4IiwicmVuZGVyT3JnYW5pemF0aW9ucyIsIm1ldGhvZHMiLCJnZXREZXBsb3llZE9yZ2FuaXphdGlvbnMiLCJjYWxsIiwib3JnYW5pemF0aW9uQWRkciIsImNvbnNvbGUiLCJsb2ciLCJhbGwiLCJtYXAiLCJhZGRyIiwiaW5kZXgiLCJvcmdhbml6YXRpb24iLCJnZXRPcmdhbml6YXRpb25EZXRhaWxzIiwib3JnYW5pemF0aW9ucyIsIkNvbXBvbmVudCJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxBQUFPOzs7O0FBQ1AsQUFBUyxBQUFNLEFBQVE7O0FBQ3ZCLEFBQU8sQUFBWTs7OztBQUNuQixBQUFPLEFBQWE7Ozs7QUFDcEIsQUFBUyxBQUFZOztBQUNyQixBQUFPLEFBQWtCOzs7Ozs7Ozs7SUFFbkIsQTs7Ozs7Ozs7Ozs7MENBaUJrQixBQUNwQjthQUFBLEFBQU8sQUFDUDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTs7QUFDRDs7Ozs2QkFDUSxBQUNQOzZCQUNFLEFBQUM7O29CQUFEO3NCQUFBLEFBQ0U7QUFERjtBQUFBLE9BQUEsa0JBQ0UsY0FBQTs7b0JBQUE7c0JBQUE7QUFBQTtBQUFBLFNBREYsQUFDRSxBQUNBLHVDQUFBLEFBQUMsOEJBQUssT0FBTixBQUFZO29CQUFaO3NCQUFBLEFBQ0U7QUFERjt5QkFDRSxjQUFBOztvQkFBQTtzQkFBQSxBQUNFO0FBREY7QUFBQSx5QkFDRSxBQUFDLHlDQUFPLFNBQVIsQUFBZ0IsU0FBUSxNQUF4QixNQUE2QixlQUE3QixBQUEyQyxRQUFPLFNBQWxEO29CQUFBO3NCQUFBLEFBQ0U7QUFERjt5QkFDRSxBQUFDLHVDQUFLLE1BQU4sQUFBVztvQkFBWDtzQkFERixBQUNFO0FBQUE7VUFMUixBQUVFLEFBQ0UsQUFDRSxBQU1ILDRCQVhMLEFBQ0UsQUFVRyxBQUFLLEFBR1g7Ozs7Ozs7Ozs7Ozt1QkEvQ2dDLGtCQUFBLEFBQVEsUUFBUixBQUM1QiwyQkFENEIsQSxBQUU1Qjs7bUJBRkc7QSw0Q0FJTjs7d0JBQUEsQUFBUSxJQUFSLEFBQVk7O3lDQUNnQixBQUFRLHFCQUNsQyxBQUFpQixJQUFJLFVBQUEsQUFBQyxNQUFELEFBQU8sT0FBVSxBQUNwQztzQkFBTSxlQUFlLDRCQUFyQixBQUFxQixBQUFhLEFBQ2xDO3lCQUFPLGFBQUEsQUFBYSxRQUFiLEFBQXFCLHlCQUE1QixBQUFPLEFBQThDLEFBQ3REO0FBSnlCLEFBQzFCLEEsaUJBQUEsQ0FEMEI7O21CQUF0QjtBLHlDQU1OOzt3QkFBQSxBQUFRLElBQVIsQUFBWTtpREFDTCxFQUFFLGVBQUYsQTs7Ozs7Ozs7Ozs7Ozs7Ozs7OztFQWRTLGdCQUFNLEEsQUFvRDFCOztrQkFBQSxBQUFlIiwiZmlsZSI6ImluZGV4LmpzP2VudHJ5Iiwic291cmNlUm9vdCI6Ii9tZWRpYS9hbmFudC9BbmFudC9Qcm9qZWN0cy9TZWN1cmUtRG9uYXRpb24ifQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL2luZGV4LmpzIl0sIm5hbWVzIjpbIlJlYWN0IiwiQ2FyZCIsIkJ1dHRvbiIsIkljb24iLCJMYXlvdXQiLCJmYWN0b3J5IiwiTGluayIsIk9yZ2FuaXphdGlvbiIsIkluZGV4IiwiaXRlbXMiLCJwcm9wcyIsIm9yZ2FuaXphdGlvbnMiLCJtYXAiLCJvcmdhbml6YXRpb24iLCJpbmRleCIsImhlYWRlciIsImRlc2NyaXB0aW9uIiwib3JnYW5pemF0aW9uQWRkciIsImZsdWlkIiwicmVuZGVyT3JnYW5pemF0aW9ucyIsIm1ldGhvZHMiLCJnZXREZXBsb3llZE9yZ2FuaXphdGlvbnMiLCJjYWxsIiwiYWxsIiwiYWRkciIsImdldE9yZ2FuaXphdGlvbkRldGFpbHMiLCJjb25zb2xlIiwibG9nIiwiQ29tcG9uZW50Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLEFBQU87Ozs7QUFDUCxBQUFTLEFBQU0sQUFBUTs7QUFDdkIsQUFBTyxBQUFZOzs7O0FBQ25CLEFBQU8sQUFBYTs7OztBQUNwQixBQUFTLEFBQVk7O0FBQ3JCLEFBQU8sQUFBa0I7Ozs7Ozs7OztJLEFBRW5COzs7Ozs7Ozs7OzswQ0FnQmtCO21CQUNwQjs7VUFBTSxhQUFRLEFBQUssTUFBTCxBQUFXLGNBQVgsQUFBeUIsSUFBSSxVQUFBLEFBQUMsY0FBRCxBQUFlLE9BQVUsQUFDbEU7O2tDQUNVLGNBQUE7O3dCQUFBOzBCQUFBLEFBQUs7QUFBTDtBQUFBLFdBQUEsZUFESCxBQUNHLEFBQUssQUFBYSxBQUMxQjt1Q0FDRSxjQUFBOzt3QkFBQTswQkFBQSxBQUNFO0FBREY7QUFBQSxXQUFBLGtCQUNFLGNBQUE7O3dCQUFBOzBCQUFBLEFBQ0c7QUFESDtBQUFBLDBCQUFBLEFBQ0csQUFBYSxBQUNkOzt3QkFBQTswQkFISixBQUNFLEFBRUUsQUFFRjtBQUZFO0FBQUEsK0JBRUYsQUFBQzt1Q0FDMEIsT0FBQSxBQUFLLE1BQUwsQUFBVyxpQkFEdEMsQUFDMkIsQUFBNEI7O3dCQUR2RDswQkFBQSxBQUdFO0FBSEY7QUFDRSw2QkFFQSxjQUFBOzt3QkFBQTswQkFBQTtBQUFBO0FBQUEsYUFYRCxBQUdILEFBS0UsQUFHRSxBQUlOO2lCQWZGLEFBQU8sQUFlRSxBQUVWO0FBakJRLEFBQ0w7QUFGSixBQUFjLEFBb0JkLE9BcEJjOzsyQ0FvQlAsQUFBQyxzQkFBRCxBQUFNLFNBQU0sT0FBWixBQUFtQjtvQkFBbkI7c0JBQVAsQUFBTyxBQUNSO0FBRFE7T0FBQTs7Ozs2QkFFQSxBQUNQOzZCQUNFLEFBQUM7O29CQUFEO3NCQUFBLEFBQ0U7QUFERjtBQUFBLE9BQUEsa0JBQ0UsY0FBQTs7b0JBQUE7c0JBQUE7QUFBQTtBQUFBLFNBREYsQUFDRSxBQUNBLHVDQUFBLEFBQUMsOEJBQUssT0FBTixBQUFZO29CQUFaO3NCQUFBLEFBQ0U7QUFERjt5QkFDRSxjQUFBOztvQkFBQTtzQkFBQSxBQUNFO0FBREY7QUFBQSx5QkFDRSxBQUFDLHlDQUFPLFNBQVIsQUFBZ0IsU0FBUSxNQUF4QixNQUE2QixlQUE3QixBQUEyQyxRQUFPLFNBQWxEO29CQUFBO3NCQUFBLEFBQ0U7QUFERjt5QkFDRSxBQUFDLHVDQUFLLE1BQU4sQUFBVztvQkFBWDtzQkFERixBQUNFO0FBQUE7VUFMUixBQUVFLEFBQ0UsQUFDRSxBQU1ILDRCQVhMLEFBQ0UsQUFVRyxBQUFLLEFBR1g7Ozs7Ozs7Ozs7Ozt1QkFwRGdDLGtCQUFBLEFBQVEsUUFBUixBQUM1QiwyQkFENEIsQSxBQUU1Qjs7bUJBRkc7QTs7eUNBR3NCLEFBQVEscUJBQ2xDLEFBQWlCLElBQUksVUFBQSxBQUFDLE1BQUQsQUFBTyxPQUFVLEFBQ3BDO3NCQUFNLGVBQWUsNEJBQXJCLEFBQXFCLEFBQWEsQUFDbEM7eUJBQU8sYUFBQSxBQUFhLFFBQWIsQUFBcUIseUJBQTVCLEFBQU8sQUFBOEMsQUFDdEQ7QUFKeUIsQUFDMUIsQSxpQkFBQSxDQUQwQjs7bUJBQXRCO0EseUNBTU47O3dCQUFBLEFBQVEsSUFBUixBQUFZLEFBQ1o7d0JBQUEsQUFBUSxJQUFSLEFBQVk7aURBQ0wsRUFBRSxlQUFGLGVBQWlCLGtCQUFqQixBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0VBYlMsZ0JBQU0sQSxBQXlEMUI7O2tCQUFBLEFBQWUiLCJmaWxlIjoiaW5kZXguanM/ZW50cnkiLCJzb3VyY2VSb290IjoiL21lZGlhL2FuYW50L0FuYW50L1Byb2plY3RzL1NlY3VyZS1Eb25hdGlvbiJ9

@@ -24,7 +24,7 @@ class NewOrganization extends React.Component {
       });
       console.log(accounts);
       await factory.methods
-        .createCampaigns(this.state.minContribution)
+        .createOrganizations(this.state.minContribution)
         .send({ from: accounts[0] });
       console.log("Redirecting");
       Router.pushRoute("/");
