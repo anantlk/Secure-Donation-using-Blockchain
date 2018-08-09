@@ -1,20 +1,20 @@
 pragma solidity ^0.4.17;
 
 
-contract CampaignFactory {
-    address[] public deployedCampaigns;
+contract OrganizationFactory {
+    address[] public deployedOrganizations;
 
-    function createCampaigns(uint minimum) public {
-        address newCampaign = new Campaign(minimum , msg.sender);
-        deployedCampaigns.push(newCampaign);
+    function createOrganizations(uint minimum, string name, string description) public {
+        address newOrganization = new Organization(minimum, name, description, msg.sender);
+        deployedOrganizations.push(newOrganization);
     }
 
-    function getDeployedCampaigns() public view returns (address[]) {
-        return deployedCampaigns;
+    function getDeployedOrganizations() public view returns (address[]) {
+        return deployedOrganizations;
     }
 }
 
-contract Campaign {
+contract Organization {
     struct Request {
         string description;
         address recipent;
@@ -23,14 +23,17 @@ contract Campaign {
         uint approvalCount;
         mapping(address => bool) approvals;
     }
-    
     address public manager;
     uint public approversCount;
+    string public organizationName;
+    string public description;
     uint public minContribution;
     mapping(address => bool) public approvers;
     Request[] public requests;
     
-    function Campaign(uint minimum, address addr) public {
+    function Organization(uint minimum, string name, string desc, address addr) public {
+        description = desc;
+        organizationName = name;
         manager = addr;
         minContribution = minimum;
         approversCount = 0;
@@ -41,6 +44,12 @@ contract Campaign {
         _;
     }
     
+    function getOrganizationDetails() public view returns (string,string) {
+        return (
+            organizationName,
+            description
+            );
+    }
     function contribute() public payable {
         require(msg.value >= minContribution);
         approvers[msg.sender] = true;

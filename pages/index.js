@@ -3,28 +3,41 @@ import { Card, Button, Icon } from "semantic-ui-react";
 import Layout from "../components/Layout";
 import factory from "../ethereum/factory";
 import { Link } from "../routes";
+import Organization from "../ethereum/organization";
 
 class Index extends React.Component {
   static async getInitialProps() {
-    const campaigns = await factory.methods.getDeployedCampaigns().call();
+    const organizationAddr = await factory.methods
+      .getDeployedOrganizations()
+      .call();
 
-    return { campaigns };
+    console.log(organizationAddr);
+    const organizations = await Promise.all(
+      organizationAddr.map((addr, index) => {
+        const organization = Organization(addr);
+        return organization.methods.getOrganizationDetails().call();
+      })
+    );
+    console.log(organizations);
+    return { organizations };
   }
 
-  renderCampaigns() {
-    const items = this.props.campaigns.map(address => {
-      return {
-        header: address,
-        description: (
-          <Link route={`/organizations/${address}`}>
-            <a>View Campaign</a>
-          </Link>
-        ),
-        fluid: true
-      };
-    });
+  renderOrganizations() {
+    return 1;
+    // const items = this.props.organizations.map(address => {
+    //   return {
+    //     header: this.props.name,
+    //     content: this.props.desc,
+    //     description: (
+    //       <Link route={`/organizations/${address}`}>
+    //         <a>View Organization</a>
+    //       </Link>
+    //     ),
+    //     fluid: true
+    //   };
+    // });
 
-    return <Card.Group items={items} />;
+    // return <Card.Group items={items} />;
   }
   render() {
     return (
@@ -38,7 +51,7 @@ class Index extends React.Component {
             </Button>
           </a>
         </Link>
-        {this.renderCampaigns()}
+        {this.renderOrganizations()}
       </Layout>
     );
   }
