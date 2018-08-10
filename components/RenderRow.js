@@ -3,21 +3,52 @@ import { Table, Button } from "semantic-ui-react";
 import web3 from "../ethereum/web3";
 import Organization from "../ethereum/organization";
 import { Router } from "../routes";
+
 class RenderRow extends React.Component {
+  state = {
+    approvalLoading: false,
+    finalizeLoading: false,
+    errMessage: ""
+  };
   async onApprove() {
     const organization = Organization(this.props.address);
-    const accounts = await web3.eth.getAccounts();
-    await organization.methods.approveRequest(this.props.id).send({
-      from: accounts[0]
+    try {
+      const accounts = await web3.eth.getAccounts();
+      this.setState({
+        approvalLoading: true,
+        errMessage: ""
+      });
+      await organization.methods.approveRequest(this.props.id).send({
+        from: accounts[0]
+      });
+    } catch (err) {
+      this.setState({
+        errMessage: err.message
+      });
+    }
+    this.setState({
+      approvalLoading: false
     });
-    Router.replaceRoute(`/organizations/${this.props.address}/requests`);
   }
 
   async onFinalize() {
-    const organization = organization(this.props.address);
-    const accounts = await web3.eth.getAccounts();
-    await organization.methods.finalizeRequest(this.props.id).send({
-      from: accounts[0]
+    const organization = Organization(this.props.address);
+    try {
+      this.setState({
+        finalizeLoading: true,
+        errMessage: false
+      });
+      const accounts = await web3.eth.getAccounts();
+      await organization.methods.finalizeRequest(this.props.id).send({
+        from: accounts[0]
+      });
+    } catch (err) {
+      this.setState({
+        errMessage: err.message
+      });
+    }
+    this.setState({
+      finalizeLoading: false
     });
   }
   render() {
@@ -38,14 +69,24 @@ class RenderRow extends React.Component {
         </Cell>
         <Cell>
           {this.props.request.complete ? null : (
-            <Button onClick={this.onApprove.bind(this)} color="green" basic>
+            <Button
+              loading={this.state.approvalLoading}
+              onClick={this.onApprove.bind(this)}
+              color="green"
+              basic
+            >
               Approve
             </Button>
           )}
         </Cell>
         <Cell>
           {this.props.request.complete ? null : (
-            <Button onClick={this.onFinalize.bind(this)} color="teal" basic>
+            <Button
+              loading={this.state.finalizeLoading}
+              onClick={this.onFinalize.bind(this)}
+              color="teal"
+              basic
+            >
               Finalize
             </Button>
           )}

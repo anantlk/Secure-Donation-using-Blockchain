@@ -20,6 +20,7 @@ contract Organization {
         string description;
         address recipent;
         uint value;
+        uint numOfAllowedApprovers;
         bool complete;
         uint approvalCount;
         mapping(address => bool) approvals;
@@ -52,8 +53,8 @@ contract Organization {
         _;
     }
     
-    function isAprrover(address addr, uint id) private returns(bool){
-        for(uint i=0;i<num;i++)
+    function isAprrover(address addr, uint id,uint numOfAllowedApprovers) private returns(bool){
+        for(uint i=0;i<numOfAllowedApprovers;i++)
         {
             if(addr == reqApprovers[id][i])
                 return true;
@@ -71,16 +72,10 @@ contract Organization {
             );
     }
     
-    function getApprovers(uint id) private {
+    function getApprovers(uint id,uint numOfAllowedApprovers) private {
         
-        uint index;
-        
-        if(approversCount > 10)
-            num = uint(approversCount/10);
-        else
-            num = 3;
-            
-        for(uint i=0;i<num;i++)
+        uint index;    
+        for(uint i=0;i<numOfAllowedApprovers;i++)
         {
             if(start < approversCount)
             {
@@ -88,8 +83,9 @@ contract Organization {
                 start = start + 1;
             }
             else {
-                reqApprovers[id].push(approvers[start]);
                 start = 0;
+                reqApprovers[id].push(approvers[start]);
+                start = start + 1;
             }
             
         }
@@ -118,23 +114,27 @@ contract Organization {
     }
 
     function createRequest(string desc, address vendor, uint value) public restricted {
-        require(approversCount >= num);
+        require(approversCount >= 3);
+        if(approversCount > 10)
+            num = uint(approversCount/10);
+            
         Request memory newRequest = Request({
             id:requests.length,
             description : desc,
             recipent : vendor,
             value : value,
+            numOfAllowedApprovers: num,
             approvalCount : 0,
             complete : false
         });
         requests.push(newRequest);
-        getApprovers(newRequest.id);
+        getApprovers(newRequest.id,newRequest.numOfAllowedApprovers);
     }
 
     function approveRequest(uint index) public {
         Request storage request = requests[index];
         
-        require(isAprrover(msg.sender, request.id));
+        require(isAprrover(msg.sender, request.id,request.numOfAllowedApprovers));
         require(!request.approvals[msg.sender]);
         
         request.approvals[msg.sender] = true;
