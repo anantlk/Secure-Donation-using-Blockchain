@@ -16,6 +16,7 @@ contract OrganizationFactory {
 
 contract Organization {
     struct Request {
+        uint id;
         string description;
         address recipent;
         uint value;
@@ -23,12 +24,15 @@ contract Organization {
         uint approvalCount;
         mapping(address => bool) approvals;
     }
+    mapping (uint => address[]) public reqApprovers;
     address public manager;
+    uint public start;
+    uint public num;
     uint public approversCount;
     string public organizationName;
     string public description;
     uint public minContribution;
-    mapping(address => bool) public approvers;
+    address[] public approvers;
     Request[] public requests;
     
     function Organization(uint minimum, string name, string desc, address addr) public {
@@ -37,12 +41,28 @@ contract Organization {
         manager = addr;
         minContribution = minimum;
         approversCount = 0;
+        start = 0;
+        num = 3;
     }
+    
+    //Various Constrained Services
     
     modifier restricted () {
         require(msg.sender == manager);
         _;
     }
+    
+    function isAprrover(address addr, uint id) private returns(bool){
+        for(uint i=0;i<num;i++)
+        {
+            if(addr == reqApprovers[id][i])
+                return true;
+        }
+        return false;
+    }
+    
+    
+    //Functions to retrieve data from blockchain
     
     function getOrganizationDetails() public view returns (string,string) {
         return (
@@ -50,44 +70,32 @@ contract Organization {
             description
             );
     }
-    function contribute() public payable {
-        require(msg.value >= minContribution);
-        approvers[msg.sender] = true;
-        approversCount ++;
+    
+    function getApprovers(uint id) private {
+        
+        uint index;
+        
+        if(approversCount > 10)
+            num = uint(approversCount/10);
+        else
+            num = 3;
+            
+        for(uint i=0;i<num;i++)
+        {
+            if(start < approversCount)
+            {
+                reqApprovers[id].push(approvers[start]);
+                start = start + 1;
+            }
+            else {
+                reqApprovers[id].push(approvers[start]);
+                start = 0;
+            }
+            
+        }
+    
     }
     
-    function createRequest(string desc, address vendor, uint value) public restricted {
-        Request memory newRequest = Request({
-            description : desc,
-            recipent : vendor,
-            value : value,
-            approvalCount : 0,
-            complete : false
-        });
-        
-        requests.push(newRequest);
-    }
-    
-    function approveRequest(uint index) public {
-        Request storage request = requests[index];
-        
-        require(approvers[msg.sender]);
-        require(!request.approvals[msg.sender]);
-        
-        request.approvals[msg.sender] = true;
-        request.approvalCount ++;
-    }
-    
-    function finalizeRequest(uint index) public restricted {
-        Request storage request = requests[index];
-        
-        require(!request.complete);
-        require(request.approvalCount > approversCount/2);
-        
-        request.recipent.transfer(request.value);
-        request.complete = true;
-    }
-
     function getSummary() public view returns(uint ,uint ,uint ,uint ) {
         return (
             minContribution,
@@ -99,6 +107,48 @@ contract Organization {
 
     function getRequestsCount() public view returns(uint) {
         return requests.length;
+    }
+    
+    //Functions for the users to take action
+    
+    function contribute() public payable {
+        require(msg.value >= minContribution);
+        approvers.push(msg.sender);
+        approversCount ++;
+    }
+
+    function createRequest(string desc, address vendor, uint value) public restricted {
+        require(approversCount >= num);
+        Request memory newRequest = Request({
+            id:requests.length,
+            description : desc,
+            recipent : vendor,
+            value : value,
+            approvalCount : 0,
+            complete : false
+        });
+        requests.push(newRequest);
+        getApprovers(newRequest.id);
+    }
+
+    function approveRequest(uint index) public {
+        Request storage request = requests[index];
+        
+        require(isAprrover(msg.sender, request.id));
+        require(!request.approvals[msg.sender]);
+        
+        request.approvals[msg.sender] = true;
+        request.approvalCount ++;
+    }
+    
+    function finalizeRequest(uint index) public restricted {
+        Request storage request = requests[index];
+        
+        require(!request.complete);
+        require(request.approvalCount > reqApprovers[index].length/2);
+        
+        request.recipent.transfer(request.value);
+        request.complete = true;
     }
 
 }
