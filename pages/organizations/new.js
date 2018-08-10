@@ -1,15 +1,15 @@
 import React from "react";
-import { Form, Button, Input, Message } from "semantic-ui-react";
+import { Form, Button, Input, Message, Icon } from "semantic-ui-react";
 import Layout from "../../components/Layout";
 import factory from "../../ethereum/factory";
 import web3 from "../../ethereum/web3";
-import { Router } from "../../routes";
+import { Link, Router } from "../../routes";
 
 class NewOrganization extends React.Component {
   state = {
     minContribution: "",
-    name:"",
-    desc:"",
+    name: "",
+    desc: "",
     errMessage: "",
     loading: false
   };
@@ -24,7 +24,11 @@ class NewOrganization extends React.Component {
       });
       console.log(accounts);
       await factory.methods
-        .createOrganizations(this.state.minContribution,this.state.name,this.state.desc)
+        .createOrganizations(
+          this.state.minContribution,
+          this.state.name,
+          this.state.desc
+        )
         .send({ from: accounts[0] });
       console.log("Redirecting");
       Router.pushRoute("/");
@@ -46,9 +50,7 @@ class NewOrganization extends React.Component {
             </label>
             <Input
               value={this.state.name}
-              onChange={event =>
-                this.setState({ name: event.target.value })
-              }
+              onChange={event => this.setState({ name: event.target.value })}
             />
           </Form.Field>
           <Form.Field>
@@ -57,9 +59,7 @@ class NewOrganization extends React.Component {
             </label>
             <Input
               value={this.state.desc}
-              onChange={event =>
-                this.setState({ desc: event.target.value })
-              }
+              onChange={event => this.setState({ desc: event.target.value })}
             />
           </Form.Field>
           <Form.Field>
@@ -83,6 +83,14 @@ class NewOrganization extends React.Component {
           <Button loading={this.state.loading} primary>
             Create
           </Button>
+          <Link route={`/`}>
+            <a>
+              <Button icon labelPosition="left" primary>
+                <Icon name="left arrow" />
+                Back
+              </Button>
+            </a>
+          </Link>
         </Form>
       </Layout>
     );
