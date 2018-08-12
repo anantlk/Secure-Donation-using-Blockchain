@@ -40,5 +40,5 @@ Run the following Commands:
 7.npm run dev
 8.Open the browser on localhost:3000
 ```
-##### Note:
+#### Note:
 Before using the app Get some free ether in your Rinkeby test network using [this link](https://faucet.rinkeby.io/).
