@@ -14,8 +14,8 @@ This dApp uses Rinkeyby Private Ethereum Network for deploying the Solidity Smar
 ```
 1.Add Metamask Extension To the Browser
 2.Create an account on Ethereum Network using Metamask Extension
-3.Get some free ether in your Rinkeby test network using [this link](https://faucet.rinkeby.io/)
 ```
+3.Get some free ether in your Rinkeby test network using [this link](https://faucet.rinkeby.io/)
 
 #### Running The App
 
