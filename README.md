@@ -41,4 +41,4 @@ Run the following Commands:
 8.Open the browser on localhost:3000
 ```
 #### Note:
-Before using the app Get some free ether in your Rinkeby test network using [this link](https://faucet.rinkeby.io/).
+Before using the app get some free ether in your Rinkeby test network using [this link](https://faucet.rinkeby.io/).
