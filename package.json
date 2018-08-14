@@ -20,7 +20,6 @@
     "webpack": "^2.5.1"
   },
   "scripts": {
-    "test-contract": "mocha",
     "dev": "node server.js"
   }
 }
