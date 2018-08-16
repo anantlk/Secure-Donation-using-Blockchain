@@ -12,9 +12,9 @@ This dApp uses Rinkeyby Private Ethereum Network for deploying the Solidity Smar
 
 #### Configuring The Browser For Running The dApp
 
-1.Add [Metamask Extension](chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en) To the Browser
+1.Add [Metamask Extension](chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en) to the browser.
 
-2.Create an account on Ethereum Network using Metamask Extension
+2.Create an account on Ethereum Network using Metamask Extension.
 
 
 #### Running The App
@@ -39,8 +39,9 @@ cd ethereum
 node compile.js
 node deploy.js
 ```
-Copy the address of the deployed contract.
-Replace the address in factory.js file and ADDRESS file.
+
+Copy the address of the deployed contract and replace the address in factory.js file and ADDRESS file.
+
 Run the following commands:
 ```
 cd ..
