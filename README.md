@@ -48,6 +48,6 @@ cd ..
 npm run dev
 ```
 Open the browser on localhost:3000
-```
+
 #### Note:
 Before using the app get some free ether in your Rinkeby Account using [this link](https://faucet.rinkeby.io/).
