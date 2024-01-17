@@ -53,7 +53,7 @@ contract Organization {
         _;
     }
     
-    function isAprrover(address addr, uint id,uint numOfAllowedApprovers) private returns(bool){
+    function isApprover(address addr, uint id,uint numOfAllowedApprovers) private returns(bool){
         for(uint i=0;i<numOfAllowedApprovers;i++)
         {
             if(addr == reqApprovers[id][i])
